@@ -7,11 +7,12 @@ import axios from 'axios'
 
 const SignUp = () => {
   const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const history = useHistory()
   const signup = async () => {
     try {
-      const { status } = await axios.post('/account/signup', { username, password })
+      const { status } = await axios.post('/account/signup', { username, password, email})
       if (status === 200) {
         history.push('/')
       }
@@ -27,11 +28,14 @@ const SignUp = () => {
         <input className="form-control" value={username} onChange={e => setUsername(e.target.value)} />
         <label className="form-label">Password:</label>
         <input className="form-control" value={password} onChange={e => setPassword(e.target.value)} />
+        <label className="form-label">Email:</label>
+        <input className="form-control" value={email} onChange={e => setEmail(e.target.value)} />
         <button
           className="btn btn-success"
           type="submit"
           onClick={() => {
             setPassword('')
+            setEmail('')
             setUsername('')
             signup()
           }}

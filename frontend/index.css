@@ -1,0 +1,23 @@
+.time{
+    cursor:pointer
+}
+
+.day{
+    cursor:pointer
+}
+
+.cals{
+    cursor:pointer
+}
+
+.cals:hover{
+    color:blue
+}
+
+.finaltimes{
+    cursor: pointer
+}
+.finaltimes:hover{
+    color:chartreuse
+}
+

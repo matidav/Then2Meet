@@ -5,9 +5,9 @@ const isAuthenticated = require('../middlewares/isAuthenticated')
 const router = express.Router()
 
 router.post('/signup', async (req, res, next) => {
-  const { username, password } = req.body
+  const { username, password, email} = req.body
   try {
-    await User.create({ username, password })
+    await User.create({ username, password, email, curCal: '' })
     res.send('account is created')
   } catch {
     next(new Error('could not sign-up'))
@@ -52,6 +52,25 @@ router.get('/loggedin', async (req, res, next) => {
   } catch (err) {
     next(new Error(err.message))
   }
+})
+
+router.get('/getcals', isAuthenticated, async(req, res, next) => {
+  try{
+    User.findOne({username: req.session.username}, (err, user) => {
+      if(user){
+        const calendars = user.calendars
+        res.send(user)
+      } else {
+        next(err)
+      }
+   })
+
+  } catch (err){
+    next(new Error('cannot get calendars'))
+  }
+
+
+
 })
 
 module.exports = router

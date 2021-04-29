@@ -3,6 +3,7 @@ const path = require('path')
 const mongoose = require('mongoose')
 const cookieSession = require('cookie-session')
 const accountRouter = require('./routes/account')
+const apiRouter = require('./routes/api')
 
 const app = express()
 const MONGO_URI = 'mongodb://localhost:27017/Then2Meet'
@@ -20,6 +21,8 @@ app.use(express.static('dist'))
 app.use(express.json())
 
 app.use('/account', accountRouter)
+
+app.use('/api', apiRouter)
 
 app.use((err, req, res, next) => {
   res.status(500)
